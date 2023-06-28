@@ -1,3 +1,4 @@
+import 'package:c/learn_page.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
@@ -9,7 +10,10 @@ class InfoPage extends StatefulWidget {
 }
 
 class _InfoPageState extends State<InfoPage> {
-  @override
+  List<String> categories = <String>[];
+  int index =0;
+  String category= "a";
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -32,7 +36,7 @@ class _InfoPageState extends State<InfoPage> {
           PopupMenuButton(
             child: CircleAvatar(
               backgroundColor: Colors.yellow,
-              child: Image.asset("images/img.png"),
+              child: Image.asset("images/profilephoto.png"),
             ),
             itemBuilder: (context) => [
               PopupMenuItem(
@@ -40,7 +44,7 @@ class _InfoPageState extends State<InfoPage> {
                 child: Row(
                   children: [
                     Image.asset(
-                      "images/img.png",
+                      "images/profilephoto.png",
                       width: 20,
                     ),
                     const SizedBox(
@@ -61,7 +65,8 @@ class _InfoPageState extends State<InfoPage> {
                     const SizedBox(
                       width: 5,
                     ),
-                    const Text("My Interest"),
+                    GestureDetector(onTap: () {
+                    },child: const Text("My Mistakes")),
                   ],
                 ),
               ),
@@ -162,58 +167,86 @@ class _InfoPageState extends State<InfoPage> {
                 height: 40,
               ),
               Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                Container(
-                  width: 250,
-                  height: 250,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      bottomRight: Radius.circular(50),
+                GestureDetector(
+                  onTap: (){
+                    setState(() {
+                      category = "travel";
+                    });
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>  LearnPage(category)));
+                  },
+                  child: Container(
+                    width: 250,
+                    height: 250,
+                    decoration: BoxDecoration(
+                      image: const DecorationImage(
+                        image: AssetImage("images/travel.png"),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        bottomRight: Radius.circular(50),
+                      ),
+                      color: Colors.white,
+                      border: Border.all(
+                        color: const Color(0xffCC003A),
+                        width: 2,
+                      ),
                     ),
-                    color: Colors.white,
-                    border: Border.all(
-                      color: const Color(0xffCC003A),
-                      width: 2,
+                    child: const Text(
+                      "Travel",
+                      style: TextStyle(
+                        fontSize: 50,
+                        color: Color(0xffCC003A),
+                        fontWeight: FontWeight.w500,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  child: const Text(
-                    "Colors",
-                    style: TextStyle(
-                      fontSize: 50,
-                      color: Color(0xffCC003A),
-                      fontWeight: FontWeight.w500,
+                ),
+                GestureDetector(
+                  onTap: (){
+                    setState(() {
+                      category = "food and drink";
+                    });
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>  LearnPage(category)));
+                  },
+                  child: Container(
+                    width: 250,
+                    height: 250,
+                    decoration: BoxDecoration(
+                      image: const DecorationImage(
+                        image: AssetImage("images/fruits.png"),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        bottomRight: Radius.circular(50),
+                      ),
+                      color: Colors.white,
+                      border: Border.all(
+                        color: const Color(0xffCC003A),
+                        width: 2,
+                      ),
                     ),
-                    textAlign: TextAlign.center,
+                    child: const Text(
+                      "Food and Drinks",
+                      style: TextStyle(
+                        fontSize: 50,
+                        color: Color(0xffCC003A),
+                        fontWeight: FontWeight.w500,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
                 Container(
                   width: 250,
                   height: 250,
                   decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      bottomRight: Radius.circular(50),
+                    image:  const DecorationImage(
+                      image: AssetImage("images/farm_animals.png"),
+                      fit: BoxFit.cover,
                     ),
-                    color: Colors.white,
-                    border: Border.all(
-                      color: const Color(0xffCC003A),
-                      width: 2,
-                    ),
-                  ),
-                  child: const Text(
-                    "Fruits",
-                    style: TextStyle(
-                      fontSize: 50,
-                      color: Color(0xffCC003A),
-                      fontWeight: FontWeight.w500,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                Container(
-                  width: 250,
-                  height: 250,
-                  decoration: BoxDecoration(
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(50),
                       bottomRight: Radius.circular(50),
@@ -238,6 +271,10 @@ class _InfoPageState extends State<InfoPage> {
                   width: 250,
                   height: 250,
                   decoration: BoxDecoration(
+                    image:  const DecorationImage(
+                    image: AssetImage("images/family_members.png"),
+                    fit: BoxFit.cover,
+                    ),
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(50),
                       bottomRight: Radius.circular(50),
@@ -281,6 +318,10 @@ class _InfoPageState extends State<InfoPage> {
                   width: 250,
                   height: 250,
                   decoration: BoxDecoration(
+                    image:  const DecorationImage(
+                      image: AssetImage("images/colors.png"),
+                      fit: BoxFit.cover,
+                    ),
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(50),
                       bottomRight: Radius.circular(50),
@@ -316,7 +357,7 @@ class _InfoPageState extends State<InfoPage> {
                     ),
                   ),
                   child: const Text(
-                    "Fruits",
+                    "Food and Drink",
                     style: TextStyle(
                       fontSize: 50,
                       color: Color(0xffCC003A),
@@ -380,4 +421,47 @@ class _InfoPageState extends State<InfoPage> {
       ),
     );
   }
+  /*
+  List addCategories(){
+    String lastCategoris = stateManagement.datas[index]["topic"];
+    categories.add(lastCategoris);
+    index++;
+      for(int i = 1;index < stateManagement.datas.length - 1; i++){
+        if(stateManagement.datas[index]["topic"] != lastCategoris){
+          categories.add(stateManagement.datas[index]["topic"]);
+          lastCategoris = stateManagement.datas[index]["topic"];
+        }
+      }
+    return categories;
+  }
+  Container? addContainer(){
+    for(int i=0;i<categories.length;i++){
+      return Container(
+        width: 250,
+        height: 250,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(50),
+            bottomRight: Radius.circular(50),
+          ),
+          color: Colors.white,
+          border: Border.all(
+            color: const Color(0xffCC003A),
+            width: 2,
+          ),
+        ),
+        child: Text(
+          categories[index],
+          style: const TextStyle(
+            fontSize: 50,
+            color: Color(0xffCC003A),
+            fontWeight: FontWeight.w500,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      );
+    }
+    return null;
+  }
+   */
 }

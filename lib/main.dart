@@ -1,9 +1,22 @@
-// ignore_for_file: prefer_const_constructors
 
+import 'dart:convert';
+
+import 'package:c/Try.dart';
+import 'package:c/finish_page.dart';
 import 'package:c/info_page.dart';
+import 'package:c/learn_page.dart';
+import 'package:c/listen_page.dart';
+import 'package:c/register.dart';
+import 'package:c/state_management.dart';
+import 'package:c/writing_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
-void main() {
+void main() async{
+  StateManagement stateManagement = Get.put(StateManagement());
+  var data  = await rootBundle.loadString('assets/data.json');
+  stateManagement.datas = jsonDecode(data);
   runApp(const MyApp());
 }
 
@@ -12,7 +25,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
@@ -40,17 +53,17 @@ class _HomePageState extends State<HomePage> {
               "images/redstone1.png",
               width: 100,
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
-            Text(
+            const Text(
               "|",
               style: TextStyle(fontSize: 35, color: Color(0xffCC003A)),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
-            Text(
+            const Text(
               "LEARN ENGLISH",
               style: TextStyle(color: Color(0xffCC003A), fontSize: 14),
             ),
@@ -59,14 +72,14 @@ class _HomePageState extends State<HomePage> {
         actions: [
           TextButton(
             onPressed: () {},
-            child: Text(
+            child: const Text(
               "CONTACT",
               style: TextStyle(color: Color(0xffCC003A)),
             ),
           ),
           TextButton(
             onPressed: () {},
-            child: Text(
+            child: const Text(
               "ABOUT US",
               style: TextStyle(color: Color(0xffCC003A)),
             ),
@@ -74,18 +87,22 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 15.0),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const RegisterPage(),
+                ),
+              );},
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
-                side: BorderSide(
+                side: const BorderSide(
                   color: Color(0xffCC003A),
                 ),
-                foregroundColor: Color(0xffCC003A),
-                fixedSize: Size(80, 20),
+                foregroundColor: const Color(0xffCC003A),
+                fixedSize: const Size(80, 20),
               ),
-              child: Text("LOGIN"),
+              child: const Text("LOGIN"),
             ),
           ),
           Padding(
@@ -95,20 +112,21 @@ class _HomePageState extends State<HomePage> {
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
-                backgroundColor: Color(0xffCC003A),
+                backgroundColor: const Color(0xffCC003A),
               ),
-              child: Text("REGISTER"),
+              child: const Text("REGISTER"),
             ),
           )
         ],
       ),
       body: SingleChildScrollView(
         child: Column(
+          mainAxisSize: MainAxisSize.max,
           children: [
             Container(
               height: 800,
               width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
                     "images/top.png",
@@ -118,17 +136,6 @@ class _HomePageState extends State<HomePage> {
               ),
               child: Row(
                 children: [
-                  /* style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              side: BorderSide(
-                                color: Color(0xffCC003A),
-                              ),
-                              foregroundColor: Color(0xffCC003A),
-                              fixedSize: Size(80, 20),
-                            ),
-                  * */
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -141,20 +148,20 @@ class _HomePageState extends State<HomePage> {
                               backgroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
-                              side: BorderSide(
+                              side: const BorderSide(
                                 color: Color(0xffCC003A),
                               ),
-                              foregroundColor: Color(0xffCC003A),
-                              fixedSize: Size(80, 30),
+                              foregroundColor: const Color(0xffCC003A),
+                              fixedSize: const Size(80, 30),
                             ),
                             onPressed: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => const InfoPage(),
+                                  builder: (context) =>  const InfoPage(),
                                 ),
                               );
                             },
-                            child: Text(
+                            child: const Text(
                               "FIND OUT MORE",
                               style: TextStyle(
                                   fontWeight: FontWeight.w800, fontSize: 20),
@@ -164,14 +171,14 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  Expanded(child: SizedBox()),
+                  const Expanded(child: SizedBox()),
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
-            Text(
+            const Text(
               "WELCOME TO REDSTONE",
               style: TextStyle(
                 color: Color(0xffCC003A),
@@ -179,9 +186,9 @@ class _HomePageState extends State<HomePage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Padding(
+            const Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 50.0, vertical: 40),
+                  EdgeInsets.symmetric(horizontal: 50.0, vertical: 40),
               child: Text(
                 "When conducting the literature review, it is important to select from journals that are best suitable for your manuscript. These resources not only will help you prepare your manuscript, but also will help you increase the chance of acceptance for your manuscript. Another point to consider is that journal articles are the best sources to use. One of the common mistakes that is made by many authors is the selection and use of many books or dissertations. These two types of sources usually do not undergo a peer-review process and as a result their scholarly capacity may be questioned by the reviewers. When writing the literature  review section of your manuscript,  one of the first things you need to make sure is that every paragraph has a theme and that every sentence within the same paragraph  is a  part  of  this theme.  In  addition,  you also  need  to make  sure  that  paragraphs included within a section are consistent with the subheading that might be used.  Writing  the  discussion  section  tends  to  be  one  of  the  hardest  tasks  in  completing  a manuscript.  Study  findings  need  to  be  followed  closely  when  discussing  results.  Common mistakes  made  by authors  are discussing  a result  not supported  by  the  data,  not  discussing results  in  light  of  the  literature  review  presented,  and  presenting  suggestions  that  are  not supported by the findings. ",
                 style: TextStyle(
@@ -198,13 +205,13 @@ class _HomePageState extends State<HomePage> {
               customCard(),
               customCard(),
             ]),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Container(
               height: 600,
               width: double.infinity,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage("images/mid.png"),
                   fit: BoxFit.cover,
@@ -213,7 +220,7 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(child: SizedBox()),
+                  const Expanded(child: SizedBox()),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -229,15 +236,17 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.0),
-                          child: Text(
-                            "When conducting the literature review, it is important to select from journals that are best suitable for your manuscript. These resources not only will help you prepare your manuscript, but also will help you increase the chance of acceptance for your manuscript. Another point to consider is that journal articles are the best sources to use. One of the common mistakes that is made by many authors is the selection and use of many books or dissertations. These two types of sources usually do not undergo a peer-review process and as a result their scholarly capacity may be questioned by the reviewers. When writing the literature  review section of your manuscript,  one of the first things you need to make sure is that every paragraph has a theme and that every sentence within the same paragraph  is a  part  of  this theme.  In  addition,  you also  need  to make  sure  that  paragraphs included within a section are consistent with the subheading that might be used.  Writing  the  discussion  section  tends  to  be  one  of  the  hardest  tasks  in  completing  a manuscript.  Study  findings  need  to  be  followed  closely  when  discussing  results.  Common mistakes  made  by authors  are discussing  a result  not supported  by  the  data,  not  discussing results  in  light  of  the  literature  review  presented,  and  presenting  suggestions  that  are  not supported by the findings. ",
-                            style: TextStyle(
-                              letterSpacing: 0.5,
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 20.0),
+                            child: Text(
+                              "When conducting the literature review, it is important to select from journals that are best suitable for your manuscript. These resources not only will help you prepare your manuscript, but also will help you increase the chance of acceptance for your manuscript. Another point to consider is that journal articles are the best sources to use. One of the common mistakes that is made by many authors is the selection and use of many books or dissertations. These two types of sources usually do not undergo a peer-review process and as a result their scholarly capacity may be questioned by the reviewers. When writing the literature  review section of your manuscript,  one of the first things you need to make sure is that every paragraph has a theme and that every sentence within the same paragraph  is a  part  of  this theme.  In  addition,  you also  need  to make  sure  that  paragraphs included within a section are consistent with the subheading that might be used.  Writing  the  discussion  section  tends  to  be  one  of  the  hardest  tasks  in  completing  a manuscript.  Study  findings  need  to  be  followed  closely  when  discussing  results.  Common mistakes  made  by authors  are discussing  a result  not supported  by  the  data,  not  discussing results  in  light  of  the  literature  review  presented,  and  presenting  suggestions  that  are  not supported by the findings. ",
+                              style: TextStyle(
+                                letterSpacing: 0.5,
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ),
@@ -247,20 +256,20 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
               customCard2(),
               customCard2(),
             ]),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Container(
               height: 600,
               width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
                     "images/bot.png",
@@ -271,7 +280,7 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 children: [
                   Expanded(child: Container()),
-                  Expanded(child: SizedBox()),
+                  const Expanded(child: SizedBox()),
                 ],
               ),
             ),
@@ -286,17 +295,17 @@ class _HomePageState extends State<HomePage> {
       width: 200,
       height: 300,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(24),
           bottomRight: Radius.circular(24),
         ),
         color: Colors.white,
         border: Border.all(
-          color: Color(0xffCC003A),
+          color: const Color(0xffCC003A),
           width: 2,
         ),
       ),
-      child: Center(child: Text("MyText", style: TextStyle(fontSize: 20))),
+      child: const Center(child: Text("MyText", style: TextStyle(fontSize: 20))),
     );
   }
 
@@ -305,17 +314,17 @@ class _HomePageState extends State<HomePage> {
       width: 300,
       height: 200,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topRight: Radius.circular(24),
           bottomLeft: Radius.circular(24),
         ),
         color: Colors.white,
         border: Border.all(
-          color: Color(0xffCC003A),
+          color: const Color(0xffCC003A),
           width: 2,
         ),
       ),
-      child: Center(child: Text("MyText", style: TextStyle(fontSize: 20))),
+      child: const Center(child: Text("MyText", style: TextStyle(fontSize: 20))),
     );
   }
 }
